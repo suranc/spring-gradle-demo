@@ -1,0 +1,48 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.2.2'
+	id 'io.spring.dependency-management' version '1.1.4'
+	id "maven-publish"
+  id "com.google.cloud.artifactregistry.gradle-plugin" version "2.2.1"
+}
+
+group = 'com.example'
+version = '0.0.4-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+repositories {
+	mavenCentral()
+  maven {
+    url "artifactregistry://us-central1-maven.pkg.dev/sales-209522/spring-forward-maven"
+  }
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+
+publishing {
+  publications {
+    maven(MavenPublication) {
+            artifact("build/libs/demo-$version"+".jar") {
+                extension 'jar'
+            }
+		}
+  }
+  repositories {
+    maven {
+      def snapshotURL = "artifactregistry://us-central1-maven.pkg.dev/sales-209522/spring-forward-maven-release"
+      def releaseURL = "artifactregistry://us-central1-maven.pkg.dev/sales-209522/spring-forward-maven-snapshot"
+      url version.endsWith('SNAPSHOT') ? snapshotURL : releaseURL
+    }
+  }
+}
