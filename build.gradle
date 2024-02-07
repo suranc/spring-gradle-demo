@@ -7,7 +7,7 @@ plugins {
 }
 
 group = 'com.example'
-version = '0.0.4-SNAPSHOT'
+version = '0.0.4'
 
 java {
 	sourceCompatibility = '17'
@@ -40,8 +40,8 @@ publishing {
   }
   repositories {
     maven {
-      def snapshotURL = "artifactregistry://us-central1-maven.pkg.dev/sales-209522/spring-forward-maven-release"
-      def releaseURL = "artifactregistry://us-central1-maven.pkg.dev/sales-209522/spring-forward-maven-snapshot"
+      def snapshotURL = "artifactregistry://us-central1-maven.pkg.dev/sales-209522/spring-forward-maven-snapshot"
+      def releaseURL = "artifactregistry://us-central1-maven.pkg.dev/sales-209522/spring-forward-maven-release"
       url version.endsWith('SNAPSHOT') ? snapshotURL : releaseURL
     }
   }
