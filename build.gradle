@@ -14,7 +14,9 @@ java {
 }
 
 repositories {
-	mavenCentral()
+  mavenCentral {
+    url "artifactregistry://us-central1-maven.pkg.dev/sales-209522/spring-forward-maven"
+  }
   maven {
     url "artifactregistry://us-central1-maven.pkg.dev/sales-209522/spring-forward-maven"
   }
